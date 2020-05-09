@@ -8,5 +8,8 @@ services:
 		 - TEMPERATURE_FILE_PATH=/sys/class/thermal/thermal_zone0/temp
 		 - TEMPERATURE_READ_INTERVAL=2
 		 - PROMETHEUS_EXPORTER_PORT=9200
+		ports:
+		 # Metrics endpoint
+		 - 9200:9200
 		restart:
 			always
