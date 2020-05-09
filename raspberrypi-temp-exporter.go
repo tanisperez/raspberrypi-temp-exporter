@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"time"
+	"strings"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -67,7 +68,8 @@ func getRaspberryPiTemperature() float64 {
 		log.Fatal(err)
 	}
 
-	temperature, err := strconv.ParseFloat(string(data), 64)
+	var dataString = strings.Trim(string(data), "\r\n")
+	temperature, err := strconv.ParseFloat(dataString, 64)
 	if err != nil {
 		log.Fatal(err)
 	}
