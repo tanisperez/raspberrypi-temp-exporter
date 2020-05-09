@@ -1,0 +1,12 @@
+version: '2'
+services:
+	# Raspberry Pi Temp Node Exporter
+	raspberrypi-temp-exporter:
+		image: tanisperez/raspberrypi-temp-exporter:1.0-arm64
+		container_name: raspberrypi-temp-exporter
+		environment:
+		 - TEMPERATURE_FILE_PATH=/sys/class/thermal/thermal_zone0/temp
+		 - TEMPERATURE_READ_INTERVAL=2
+		 - PROMETHEUS_EXPORTER_PORT=9200
+		restart:
+			always
