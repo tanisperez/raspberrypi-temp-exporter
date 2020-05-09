@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"time"
 	"strings"
+	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
@@ -82,6 +82,9 @@ func main() {
 	loadEnvironmentVariables()
 	recordTemperatureMetrics()
 
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("Raspberry Pi Temperature Exporter"))
+	})
 	http.Handle("/metrics", promhttp.Handler())
 	http.ListenAndServe(":"+prometheusPortExporter, nil)
 }
